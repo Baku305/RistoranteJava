@@ -89,7 +89,7 @@ public class ServizioRistorante {
 	static public void stampaMenu(Portata[] tipoMenu) {
 		int i = 0;
 		for(Portata portata : tipoMenu) {
-			System.out.println("ID: " + i + "\n " + portata.getNome());
+			System.out.println("ID: " + i + "\n- " + portata.getNome());
 			i++;
 		}
 	}
@@ -101,8 +101,9 @@ public class ServizioRistorante {
 	static public void stampaInteroMenu(Portata[][] interoMenu) {
 		int i = 0;
 		for(Portata[]menu : interoMenu) {
-			System.out.println(String.format("- %s",Ristorante.stampaTipoMenu(i).toUpperCase())); 
+			System.out.println(String.format("%s",Ristorante.stampaTipoMenu(i).toUpperCase())); 
 			stampaMenu(menu);
+			System.out.println("");
 			i++;
 		}
 	}
