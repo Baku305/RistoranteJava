@@ -30,7 +30,7 @@ public class ServizioRistorante {
 	
 	
 	/*
-	 * METODO INTERNO PER STAMPARE IL NOME DEL IL PREZZO DELLA PORTATA, RICEVE LA LISTA DELLE PORTATE E STAMPA IL NOME ED
+	 * METODO INTERNO PER STAMPARE IL NOME ED IL PREZZO DELLA PORTATA, RICEVE LA LISTA DELLE PORTATE E STAMPA IL NOME ED
 	 * IL PREZZO DI OGNI SINGOLA PORTATA
 	 */
 
@@ -80,6 +80,31 @@ public class ServizioRistorante {
 		System.out.println(String.format("TOTALE \n%s €", res));
 		System.out.println(String.format("TOTALE CON SCONTO \n%s €", resScontato));
 
+	}
+	
+	/*
+	 *METODO PER STAMPARE UN MENU A SCELTA
+	 */
+	
+	static public void stampaMenu(Portata[] tipoMenu) {
+		int i = 0;
+		for(Portata portata : tipoMenu) {
+			System.out.println("ID: " + i + "\n " + portata.getNome());
+			i++;
+		}
+	}
+	
+	/*
+	 *METODO PER STAMPARE INTERO MENU DEL RISTORANTE
+	 */
+	
+	static public void stampaInteroMenu(Portata[][] interoMenu) {
+		int i = 0;
+		for(Portata[]menu : interoMenu) {
+			System.out.println(String.format("- %s",Ristorante.stampaTipoMenu(i).toUpperCase())); 
+			stampaMenu(menu);
+			i++;
+		}
 	}
 
 }

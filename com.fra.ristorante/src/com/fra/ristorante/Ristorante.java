@@ -104,10 +104,10 @@ public class Ristorante {
 	}
 	
 	/*
-	 * METODO INTERNO PER STAMPARE NOME DEL MENU
+	 * METODO PER STAMPARE NOME DEL MENU
 	 */
 	
-	static private String stampaTipoMenu(int indexMenu) {
+	static public String stampaTipoMenu(int indexMenu) {
 		switch(indexMenu) {
 		case 0 : return "Antipasti";
 		case 1 : return "Primi";
@@ -118,10 +118,10 @@ public class Ristorante {
 	}
 
 	/*
-	 * METODO INTERNO PER TROVARE PORTATA
+	 * METODO INTERNO PER TROVARE SINGOLA PORTATA
 	 */
 	
-	static private Portata trovaPortata2D(int codicePortata, Portata[] tipoMenu) {
+	static private Portata trovaPortata(int codicePortata, Portata[] tipoMenu) {
 		Portata portata = null;
 		if (codicePortata < tipoMenu.length) {
 			portata = tipoMenu[codicePortata];
@@ -137,6 +137,7 @@ public class Ristorante {
 		System.out.println(String.format("prodotto con codice %s non trovato in %s", codicePortata,stampaTipoMenu(menuIndex)));
 	}
 	
+
 	/*
 	 * METODO PER IL TOTALE DELLA SPESA CON OPZIONE PER IL CONTROLLO
 	 */
@@ -149,7 +150,7 @@ public class Ristorante {
 			switch (i) {
 			case 0:
 				for (int p : codiciPortate[i]) {
-					Portata portata = trovaPortata2D(p, antipasti);
+					Portata portata = trovaPortata(p, antipasti);
 					if(portata!=null) {						
 						res += portata.getPrezzo();
 					} else if (portata == null && controllo) {
@@ -159,7 +160,7 @@ public class Ristorante {
 				break;
 			case 1:
 				for (int p : codiciPortate[i]) {
-					Portata portata = trovaPortata2D(p, primi);
+					Portata portata = trovaPortata(p, primi);
 					if(portata!=null){						
 						res += portata.getPrezzo();
 					}else if (portata == null && controllo) {
@@ -169,7 +170,7 @@ public class Ristorante {
 				break;
 			case 2:
 				for (int p : codiciPortate[i]) {
-					Portata portata = trovaPortata2D(p, secondi);
+					Portata portata = trovaPortata(p, secondi);
 					if(portata!=null){						
 						res += portata.getPrezzo();
 					}else if (portata == null && controllo) {
@@ -179,7 +180,7 @@ public class Ristorante {
 				break;
 			case 3:
 				for (int p : codiciPortate[i]) {
-					Portata portata = trovaPortata2D(p, dolci);
+					Portata portata = trovaPortata(p, dolci);
 					if(portata!=null){						
 						res += portata.getPrezzo();
 					}else if (portata == null && controllo) {
@@ -210,7 +211,7 @@ public class Ristorante {
 			switch (i) {
 			case 0:
 				for (int p : codiciPortate[i]) {
-					Portata portata = trovaPortata2D(p, antipasti);
+					Portata portata = trovaPortata(p, antipasti);
 					if(portata == null && controllo) {
 						erroreCodicePortata(p,i);
 					}
@@ -221,7 +222,7 @@ public class Ristorante {
 				break;
 			case 1:
 				for (int p : codiciPortate[i]) {
-					Portata portata = trovaPortata2D(p, primi);
+					Portata portata = trovaPortata(p, primi);
 					if(portata == null && controllo) {
 						erroreCodicePortata(p,i);
 					}
@@ -232,7 +233,7 @@ public class Ristorante {
 				break;
 			case 2:
 				for (int p : codiciPortate[i]) {
-					Portata portata = trovaPortata2D(p, secondi);
+					Portata portata = trovaPortata(p, secondi);
 					if(portata == null && controllo) {
 						erroreCodicePortata(p,i);
 					}
@@ -243,7 +244,7 @@ public class Ristorante {
 				break;
 			case 3:
 				for (int p : codiciPortate[i]) {
-					Portata portata = trovaPortata2D(p, dolci);
+					Portata portata = trovaPortata(p, dolci);
 					if(portata == null && controllo) {
 						erroreCodicePortata(p,i);
 					}
