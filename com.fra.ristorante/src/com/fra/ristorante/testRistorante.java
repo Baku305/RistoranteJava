@@ -1,6 +1,7 @@
 package com.fra.ristorante;
 
-import java.util.ArrayList;
+
+import java.util.List;
 
 public class testRistorante {
 
@@ -30,8 +31,8 @@ public class testRistorante {
 		System.out.println("**********TOTALE SPESA*************");
 		System.out.println(ristorante.getTotaleSpesa2D(portate2D,true)+" €\n");
 		System.out.println("**********TOTALE PORTATE*************");
-		ArrayList<ArrayList<Portata>> listaPortate = ristorante.getPortate2D(portate2D,true);
-		for(ArrayList<Portata> portate : listaPortate) {
+		List<List<Portata>> listaPortate = ristorante.getPortate2D(portate2D,true);
+		for(List<Portata> portate : listaPortate) {
 			for(Portata p : portate) {
 				if(p!=null)
 				System.out.println(p.getNome());

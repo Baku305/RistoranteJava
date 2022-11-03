@@ -1,5 +1,6 @@
 package com.fra.ristorante;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Ristorante {
 
@@ -198,13 +199,13 @@ public class Ristorante {
 	 * 
 	 */
 
-	public ArrayList<ArrayList<Portata>> getPortate2D(int[][] codiciPortate, boolean controllo) {
+	public List<List<Portata>> getPortate2D(int[][] codiciPortate, boolean controllo) {
 
-		ArrayList<ArrayList<Portata>> listaPortateDinamica = new ArrayList<>();
+		List<List<Portata>> listaPortateDinamica = new ArrayList<>();
 		
 		for (int i = 0; i < codiciPortate.length; i++) {
 
-			ArrayList<Portata> portataDinamica = new ArrayList<>();
+			List<Portata> portataDinamica = new ArrayList<>();
 
 			switch (i) {
 			case 0:

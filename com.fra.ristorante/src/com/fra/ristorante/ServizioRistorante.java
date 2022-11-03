@@ -1,5 +1,5 @@
 package com.fra.ristorante;
-import java.util.ArrayList;
+import java.util.List;
 
 public class ServizioRistorante {
 	
@@ -34,7 +34,7 @@ public class ServizioRistorante {
 	 * IL PREZZO DI OGNI SINGOLA PORTATA
 	 */
 
-	static private void stampaNomePrezzo(ArrayList<Portata> portata) {
+	static private void stampaNomePrezzo(List<Portata> portata) {
 		for (int i = 0; i < portata.size(); i++) {
 			if (portata.get(i) != null) {
 				String pNome = portata.get(i).getNome();
@@ -50,11 +50,11 @@ public class ServizioRistorante {
 
 	public static void stampaComanda2D(int[][] codiciPortate, Ristorante ristorante) {
 
-		ArrayList<ArrayList<Portata>> portate = ristorante.getPortate2D(codiciPortate,true);
+		List<List<Portata>> portate = ristorante.getPortate2D(codiciPortate,true);
 		double res = ristorante.getTotaleSpesa2D(codiciPortate,false);
 		double resScontato = calcolaSpesaConSconto(ristorante, codiciPortate, 10, false);
 
-		for (ArrayList<Portata> p : portate) {
+		for (List<Portata> p : portate) {
 
 			switch (portate.indexOf(p)) {
 			case 0:
