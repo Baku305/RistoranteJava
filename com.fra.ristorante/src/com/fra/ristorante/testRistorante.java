@@ -6,7 +6,7 @@ public class testRistorante {
 
 	public static void main(String[] args) {
 
-		int[][] portate2D = { { 0, 0, 1, 2, 5 }, { 0, 1, 1, 5 }, { 0, 2 }, { 0, 1 } };
+		int[][] portate2D = { { 0, 0, 1, 2, 5 }, { 0, 1, 2, 5 }, { 0, 2 }, { 0, 1 } };
 
 		Portata bruschette = new Portata("bruschette", 1.0);
 		Portata antipastoMare = new Portata("antipasto di mare", 12.0);
@@ -63,6 +63,8 @@ public class testRistorante {
 
 		System.out.println("**********************************STAMPA INTERO MENU*********************");
 		ServizioRistorante.stampaInteroMenu(menu);
+		
+		CreaComanda.creaComanda(menu, ristorante);
 
 	}
 
