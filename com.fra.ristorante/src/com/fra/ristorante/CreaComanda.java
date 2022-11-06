@@ -19,7 +19,7 @@ public class CreaComanda {
 //		
 //	}
 
-	static private void richiestaPortata(Portata[][] portate, int indicePortate, List<Integer> tipoMenu) {
+	static private void richiestaPortata(Portata[][] portate, int indicePortate, List<Integer> tipoMenu,ServizioRistorante servizioRistorante) {
 		try {
 			String res = "";
 			int ordine = 0;
@@ -33,7 +33,7 @@ public class CreaComanda {
 			if (res.contains("si")) {
 				while (loop) {
 					System.out.println(String.format("Scegli altri %s", Ristorante.stampaTipoMenu(indicePortate)));
-					ServizioRistorante.stampaMenu(portate[indicePortate]);
+					servizioRistorante.stampaMenu(portate[indicePortate]);
 					ordine = scanner.nextInt();
 					scanner.nextLine();
 					if (ordine < portate[indicePortate].length) {
@@ -61,14 +61,15 @@ public class CreaComanda {
 		List<Integer> primi = new ArrayList<Integer>();
 		List<Integer> secondi = new ArrayList<Integer>();
 		List<Integer> dolci = new ArrayList<Integer>();
+		Ristorante.ServizioRistorante servizioRistorante = ristorante.new ServizioRistorante();
 
-		richiestaPortata(portate, 0, antipasti);
+		richiestaPortata(portate, 0, antipasti,servizioRistorante);
 
-		richiestaPortata(portate, 1, primi);
+		richiestaPortata(portate, 1, primi,servizioRistorante);
 
-		richiestaPortata(portate, 2, secondi);
+		richiestaPortata(portate, 2, secondi,servizioRistorante);
 
-		richiestaPortata(portate, 3, dolci);
+		richiestaPortata(portate, 3, dolci,servizioRistorante);
 
 		int[] antipastiArray = antipasti.stream().mapToInt(Integer::intValue).toArray();
 		int[] primiArray = primi.stream().mapToInt(Integer::intValue).toArray();
@@ -77,7 +78,6 @@ public class CreaComanda {
 
 		int[][] comandaArray = { antipastiArray, primiArray, secondiArray, dolciArray };
 
-		Ristorante.ServizioRistorante servizioRistorante = ristorante.new ServizioRistorante();
 		servizioRistorante.stampaComanda2D(comandaArray);
 		return comandaArray;
 

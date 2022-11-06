@@ -2,7 +2,6 @@ package com.fra.ristorante;
 
 import java.util.List;
 
-import com.fra.ristorante.Ristorante.ServizioRistorante;
 
 public class testRistorante {
 
@@ -59,10 +58,10 @@ public class testRistorante {
 		servizioRistorante.stampaComanda2D(portate2D);
 		System.out.println("");
 		System.out.println("**********************************STAMPA MENU A SCELTA*******************");
-		ServizioRistorante.stampaMenu(menu[0]);
+		servizioRistorante.stampaMenu(ristorante.getAntipasti());
 		System.out.println("");
 		System.out.println("**********************************STAMPA INTERO MENU*********************");
-		ServizioRistorante.stampaInteroMenu(menu);
+		servizioRistorante.stampaInteroMenu();
 		System.out.println("**********************************CREAZIONE COMANDA CON SCANNER*********************");
 
 		CreaComanda.creaComanda(menu, ristorante);
