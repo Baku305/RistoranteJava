@@ -393,29 +393,15 @@ public class Ristorante {
 			break;
 			case 3 : menuLoop(id,dolci);
 			break;
-			default : stampaMenu(id) ;
+			default : stampaMenu() ;
 			break;
 			}	
 	};
-		
+	
 		public void stampaMenu() {
 			menuLoop(antipasti,primi,secondi,dolci) ;
 		}
 		
-		
-//		/*
-//		 * METODO PER STAMPARE INTERO MENU DEL RISTORANTE
-//		 */
-//
-//		public void stampaInteroMenu() {
-//			
-//			Portata[][] interoMenu = { antipasti, primi, secondi, dolci };
-//			for (int i = 0; i < interoMenu.length; i++) {
-//				System.out.println(String.format("%s", Ristorante.stampaTipoMenu(i).toUpperCase()));
-//				stampaMenu(i);
-//				System.out.println("");
-//			}
-//		}
 
 	}
 
