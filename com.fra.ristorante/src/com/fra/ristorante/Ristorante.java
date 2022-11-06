@@ -269,7 +269,7 @@ public class Ristorante {
 
 	/*
 	 * 
-	 * ISTANZIO CLASSE INNESTATA SERVIZIO RISTORANTE
+	 * CLASSE INNESTATA SERVIZIO RISTORANTE
 	 * 
 	 */
 
@@ -356,32 +356,66 @@ public class Ristorante {
 		}
 
 		/*
-		 * METODO PER STAMPARE UN MENU A SCELTA
+		 * METODO PER STAMPARE UN MENU A SCELTA O INTERO MENU (NO PARAMETRI)
 		 */
-
-		public void stampaMenu(Portata[] tipoMenu) {
-			int i = 0;
-			for (Portata portata : tipoMenu) {
-				System.out.println("ID: " + i + "\n- " + portata.getNome());
-				i++;
-			}				
-		};
 		
-		
-		/*
-		 * METODO PER STAMPARE INTERO MENU DEL RISTORANTE
-		 */
-
-		public void stampaInteroMenu() {
-			int i = 0;
-			Portata[][] interoMenu = { antipasti, primi, secondi, dolci };
-			for (Portata[] menu : interoMenu) {
-				System.out.println(String.format("%s", Ristorante.stampaTipoMenu(i).toUpperCase()));
-				stampaMenu(menu);
+		private static void menuLoop(Portata[]... tipoMenu) {
+			int j = 0;
+			for(Portata[] portata : tipoMenu) {
+				int i = 0;
+				System.out.println(String.format("%s", Ristorante.stampaTipoMenu(j).toUpperCase()));
+				j++;
+				for(Portata p : portata) {
+					System.out.println("ID: " + i + "\n- " + p.getNome());
+					i++;
+				}
 				System.out.println("");
-				i++;
 			}
 		}
+		
+		private static void menuLoop(int id,Portata[] tipoMenu) {
+			int i = 0;
+			System.out.println(String.format("%s", Ristorante.stampaTipoMenu(id).toUpperCase()));
+			for(Portata portata : tipoMenu) {
+					System.out.println("ID: " + i + "\n- " + portata.getNome());
+					i++;
+			}
+			System.out.println("");
+		}
+
+		public void stampaMenu(int id) {
+			switch(id) {
+			case 0 : menuLoop(id,antipasti);
+			break;
+			case 1 : menuLoop(id,primi);
+			break;
+			case 2 : menuLoop(id,secondi);
+			break;
+			case 3 : menuLoop(id,dolci);
+			break;
+			default : stampaMenu(id) ;
+			break;
+			}	
+	};
+		
+		public void stampaMenu() {
+			menuLoop(antipasti,primi,secondi,dolci) ;
+		}
+		
+		
+//		/*
+//		 * METODO PER STAMPARE INTERO MENU DEL RISTORANTE
+//		 */
+//
+//		public void stampaInteroMenu() {
+//			
+//			Portata[][] interoMenu = { antipasti, primi, secondi, dolci };
+//			for (int i = 0; i < interoMenu.length; i++) {
+//				System.out.println(String.format("%s", Ristorante.stampaTipoMenu(i).toUpperCase()));
+//				stampaMenu(i);
+//				System.out.println("");
+//			}
+//		}
 
 	}
 

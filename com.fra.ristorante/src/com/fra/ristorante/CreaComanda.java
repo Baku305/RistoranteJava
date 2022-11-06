@@ -33,7 +33,7 @@ public class CreaComanda {
 			if (res.contains("si")) {
 				while (loop) {
 					System.out.println(String.format("Scegli altri %s", Ristorante.stampaTipoMenu(indicePortate)));
-					servizioRistorante.stampaMenu(portate[indicePortate]);
+					servizioRistorante.stampaMenu(indicePortate);
 					ordine = scanner.nextInt();
 					scanner.nextLine();
 					if (ordine < portate[indicePortate].length) {

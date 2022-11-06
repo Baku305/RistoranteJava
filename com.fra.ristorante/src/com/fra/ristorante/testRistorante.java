@@ -58,10 +58,10 @@ public class testRistorante {
 		servizioRistorante.stampaComanda2D(portate2D);
 		System.out.println("");
 		System.out.println("**********************************STAMPA MENU A SCELTA*******************");
-		servizioRistorante.stampaMenu(ristorante.getAntipasti());
+		servizioRistorante.stampaMenu(1);
 		System.out.println("");
 		System.out.println("**********************************STAMPA INTERO MENU*********************");
-		servizioRistorante.stampaInteroMenu();
+		servizioRistorante.stampaMenu();
 		System.out.println("**********************************CREAZIONE COMANDA CON SCANNER*********************");
 
 		CreaComanda.creaComanda(menu, ristorante);
