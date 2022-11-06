@@ -2,6 +2,8 @@ package com.fra.ristorante;
 
 import java.util.List;
 
+import com.fra.ristorante.Ristorante.ServizioRistorante;
+
 public class testRistorante {
 
 	public static void main(String[] args) {
@@ -45,25 +47,24 @@ public class testRistorante {
 			System.out.println("");
 			i++;
 		}
+		
+		Ristorante.ServizioRistorante servizioRistorante = ristorante.new ServizioRistorante();
 
 		System.out.println("**********************************SPESA CON SCONTO***********************");
-		System.out.println(ServizioRistorante.calcolaSpesaConSconto(ristorante, portate2D, 10, true) + " €\n");
-
+		System.out.println(servizioRistorante.calcolaSpesaConSconto(portate2D, 10, true) + " €\n");
 		System.out.println("**********************************INDIRIZZO COMPLETO*********************");
-		ServizioRistorante.getIndirizzoCompleto(ristorante);
+		servizioRistorante.getIndirizzoCompleto();
 		System.out.println("");
-
 		System.out.println("**********************************STAMPA COMANDA*************************");
-		ServizioRistorante.stampaComanda2D(portate2D, ristorante);
+		servizioRistorante.stampaComanda2D(portate2D);
 		System.out.println("");
-
 		System.out.println("**********************************STAMPA MENU A SCELTA*******************");
-		ServizioRistorante.stampaMenu(ristorante.getPrimi());
+		ServizioRistorante.stampaMenu(menu[0]);
 		System.out.println("");
-
 		System.out.println("**********************************STAMPA INTERO MENU*********************");
 		ServizioRistorante.stampaInteroMenu(menu);
-		
+		System.out.println("**********************************CREAZIONE COMANDA CON SCANNER*********************");
+
 		CreaComanda.creaComanda(menu, ristorante);
 
 	}

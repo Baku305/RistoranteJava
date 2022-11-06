@@ -258,5 +258,121 @@ public class Ristorante {
 
 		return listaPortateDinamica;
 	}
+	
+	/*
+	 * 
+	 * ISTANZIO CLASSE INNESTATA SERVIZIO RISTORANTE
+	 * 
+	 * */
+	
+	public class ServizioRistorante {
+		
+		/*
+		 * METODO PER IL CALCOLO DELLA SPESA TOTALE CON LO SCONTO, CON OPZIONE PER IL CONTROLLO CHE POI VIENE PASSATO AL METOTO 
+		 * "GetTotaleSpesa"
+		 */
+
+		public double calcolaSpesaConSconto(int[][] codiciPortate, int sconto, boolean controllo) {
+
+			double totaleSpesa = getTotaleSpesa2D(codiciPortate,controllo);
+
+			double totaleSconto = (totaleSpesa / 100) * sconto;
+
+			double totale = totaleSpesa - totaleSconto;
+
+			return totale;
+		}
+		
+		/*
+		 * METODO PER STAMPARE L'INDIRIZZO COMPLETO DEL RISTORANTE
+		 */
+
+		public void getIndirizzoCompleto() {
+			System.out.println(String.format("Ristorante %s \nIndirizzo : %s %s %s %s", nome,
+					indirizzo, civico, città, CAP));
+		}
+		
+		
+		/*
+		 * METODO INTERNO PER STAMPARE IL NOME ED IL PREZZO DELLA PORTATA, RICEVE LA LISTA DELLE PORTATE E STAMPA IL NOME ED
+		 * IL PREZZO DI OGNI SINGOLA PORTATA
+		 */
+
+		static private void stampaNomePrezzo(List<Portata> portata) {
+			for (int i = 0; i < portata.size(); i++) {
+				if (portata.get(i) != null) {
+					String pNome = portata.get(i).getNome();
+					double pCosto = portata.get(i).getPrezzo();
+					System.out.println("- " + pNome + " " + pCosto + " €");
+				}
+			};
+		}
+		
+		/*
+		 * METODO PER STAMPARE LA COMANDA PER INTERNO
+		 */
+
+		public void stampaComanda2D(int[][] codiciPortate) {
+
+			List<List<Portata>> portate = getPortate2D(codiciPortate,true);
+			double res = getTotaleSpesa2D(codiciPortate,false);
+			double resScontato = calcolaSpesaConSconto(codiciPortate, 10, false);
+
+			for (List<Portata> p : portate) {
+				
+				if(p.size()>0)
+				switch (portate.indexOf(p)) {
+				case 0:
+					System.out.println("ANTIPASTI");
+					stampaNomePrezzo(p);
+					break;
+				case 1 :
+					System.out.println("PRIMI");
+					stampaNomePrezzo(p);
+					break;
+				case 2 :
+					System.out.println("SECONDI");
+					stampaNomePrezzo(p);
+					break;
+				case 3 :
+					System.out.println("DOLCI");
+					stampaNomePrezzo(p);
+					break;
+
+				}
+			}
+			
+			System.out.println(String.format("TOTALE \n%s €", res));
+			System.out.println(String.format("TOTALE CON SCONTO \n%s €", resScontato));
+
+		}
+		
+		/*
+		 *METODO PER STAMPARE UN MENU A SCELTA
+		 */
+		
+		static public void stampaMenu(Portata[] tipoMenu) {
+			int i = 0;
+			for(Portata portata : tipoMenu) {
+				System.out.println("ID: " + i + "\n- " + portata.getNome());
+				i++;
+			}
+		}
+		
+		/*
+		 *METODO PER STAMPARE INTERO MENU DEL RISTORANTE
+		 */
+		
+		static public void stampaInteroMenu(Portata[][] interoMenu) {
+			int i = 0;
+			for(Portata[]menu : interoMenu) {
+				System.out.println(String.format("%s",Ristorante.stampaTipoMenu(i).toUpperCase())); 
+				stampaMenu(menu);
+				System.out.println("");
+				i++;
+			}
+		}
+
+	}
 
 }

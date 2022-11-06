@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.fra.ristorante.Ristorante.ServizioRistorante;
+
 public class CreaComanda {
 
 	static Scanner scanner = new Scanner(System.in);
@@ -16,8 +18,6 @@ public class CreaComanda {
 //		}
 //		
 //	}
-
-	
 
 	static private void richiestaPortata(Portata[][] portate, int indicePortate, List<Integer> tipoMenu) {
 		try {
@@ -77,7 +77,8 @@ public class CreaComanda {
 
 		int[][] comandaArray = { antipastiArray, primiArray, secondiArray, dolciArray };
 
-		ServizioRistorante.stampaComanda2D(comandaArray, ristorante);
+		Ristorante.ServizioRistorante servizioRistorante = ristorante.new ServizioRistorante();
+		servizioRistorante.stampaComanda2D(comandaArray);
 		return comandaArray;
 
 	}
