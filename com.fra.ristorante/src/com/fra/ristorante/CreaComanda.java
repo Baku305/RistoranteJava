@@ -10,16 +10,7 @@ public class CreaComanda {
 
 	static Scanner scanner = new Scanner(System.in);
 
-//	static public void chiediComanda(){
-//		String res = "";
-//		System.out.println("Vuoi creare una nuova comanda?");
-//		if(res.contains("si")) {
-//			creaComanda();
-//		}
-//		
-//	}
-
-	static private void richiestaPortata(Portata[][] portate, int indicePortate, List<Integer> tipoMenu,ServizioRistorante servizioRistorante) {
+	static private void richiestaPortata(Ristorante ristorante, int indicePortate, List<Integer> tipoMenu,ServizioRistorante servizioRistorante) {
 		try {
 			String res = "";
 			int ordine = 0;
@@ -36,7 +27,7 @@ public class CreaComanda {
 					servizioRistorante.stampaMenu(indicePortate);
 					ordine = scanner.nextInt();
 					scanner.nextLine();
-					if (ordine < portate[indicePortate].length) {
+					if (ordine < ristorante.getMenu().get(indicePortate).size()) {
 						tipoMenu.add(ordine);
 						System.out.println("ne vuoi un altro?");
 						res = scanner.nextLine();
@@ -55,7 +46,7 @@ public class CreaComanda {
 		}
 	}
 
-	static public int[][] creaComanda(Portata[][] portate, Ristorante ristorante) {
+	static public int[][] creaComanda(Ristorante ristorante) {
 		
 		List<Integer> antipasti = new ArrayList<Integer>();
 		List<Integer> primi = new ArrayList<Integer>();
@@ -63,13 +54,13 @@ public class CreaComanda {
 		List<Integer> dolci = new ArrayList<Integer>();
 		Ristorante.ServizioRistorante servizioRistorante = ristorante.new ServizioRistorante();
 
-		richiestaPortata(portate, 0, antipasti,servizioRistorante);
+		richiestaPortata(ristorante, 0, antipasti,servizioRistorante);
 
-		richiestaPortata(portate, 1, primi,servizioRistorante);
+		richiestaPortata(ristorante, 1, primi,servizioRistorante);
 
-		richiestaPortata(portate, 2, secondi,servizioRistorante);
+		richiestaPortata(ristorante, 2, secondi,servizioRistorante);
 
-		richiestaPortata(portate, 3, dolci,servizioRistorante);
+		richiestaPortata(ristorante, 3, dolci,servizioRistorante);
 
 		int[] antipastiArray = antipasti.stream().mapToInt(Integer::intValue).toArray();
 		int[] primiArray = primi.stream().mapToInt(Integer::intValue).toArray();

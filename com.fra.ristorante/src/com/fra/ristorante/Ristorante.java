@@ -2,6 +2,7 @@ package com.fra.ristorante;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 public class Ristorante {
@@ -12,13 +13,12 @@ public class Ristorante {
 	private String città;
 	private String CAP;
 	private int civico;
-	private Portata[] antipasti;
-	private Portata[] primi;
-	private Portata[] secondi;
-	private Portata[] dolci;
-	private HashMap<Integer,Portata[]> menu = new HashMap<>();
-	
-	
+	private List<Portata> antipasti;
+	private List<Portata> primi;
+	private List<Portata> secondi;
+	private List<Portata> dolci;
+	private HashMap<Integer, List<Portata>> menu = new HashMap<>();
+
 	public String getNome() {
 		return nome;
 	}
@@ -59,60 +59,50 @@ public class Ristorante {
 		this.civico = civico;
 	}
 
-	public Portata[] getAntipasti() {
+	public List<Portata> getAntipasti() {
 		return antipasti;
 	}
 
-	public void setAntipasti(Portata[] antipasti) {
+	public void setAntipasti(List<Portata> antipasti) {
 		this.antipasti = antipasti;
 	}
 
-	public Portata[] getPrimi() {
+	public List<Portata> getPrimi() {
 		return primi;
 	}
 
-	public void setPrimi(Portata[] primi) {
+	public void setPrimi(List<Portata> primi) {
 		this.primi = primi;
 	}
 
-	public Portata[] getSecondi() {
+	public List<Portata> getSecondi() {
 		return secondi;
 	}
 
-	public void setSecondi(Portata[] secondi) {
+	public void setSecondi(List<Portata> secondi) {
 		this.secondi = secondi;
 	}
 
-	public Portata[] getDolci() {
+	public List<Portata> getDolci() {
 		return dolci;
 	}
 
-	public void setDolci(Portata[] dolci) {
+	public void setDolci(List<Portata> dolci) {
 		this.dolci = dolci;
 	}
-	
-	public HashMap<Integer, Portata[]> getMenu() {
+
+	public HashMap<Integer, List<Portata>> getMenu() {
 		return menu;
 	}
 
 	public Ristorante() {
 	}
 	
-	private HashMap<Integer, Portata[]> addToMenu() {
-		menu.put(0,antipasti);
-		menu.put(1,primi);
-		menu.put(2, secondi);
-		menu.put(3, dolci);
-		return menu;
-	}
 	
-	public void addtoMenu(Portata[] portata) {
-		int size = menu.size();
-		menu.put(size + 1 , portata);
-	}
 
-	public Ristorante(String nome, String indirizzo, String città, String CAP, int civico, Portata[] antipasti,
-			Portata[] primi, Portata[] secondi, Portata[] dolci) {
+
+	public Ristorante(String nome, String indirizzo, String città, String CAP, int civico, List<Portata> antipasti,
+			List<Portata> primi, List<Portata> secondi, List<Portata> dolci) {
 		this.nome = nome;
 		this.indirizzo = indirizzo;
 		this.città = città;
@@ -122,33 +112,59 @@ public class Ristorante {
 		this.primi = primi;
 		this.secondi = secondi;
 		this.dolci = dolci;
-		this.menu = addToMenu(); 
+		this.menu = addToMenu();
 	}
+	
+	public Ristorante(String nome, String indirizzo, String città, String CAP, int civico, HashMap<Integer, List<Portata>> menu) {
+		this.nome = nome;
+		this.indirizzo = indirizzo;
+		this.città = città;
+		this.CAP = CAP;
+		this.civico = civico;
+		this.antipasti = menu.get(0);
+		this.primi = menu.get(1);
+		this.secondi = menu.get(2);
+		this.dolci = menu.get(3);
+		this.menu = menu;
+	}
+	
+	/*
+	 * METODO INTERNO PER SETTARE IL MENU
+	 */
 
+	
+	private HashMap<Integer, List<Portata>> addToMenu() {
+		menu.put(0, antipasti);
+		menu.put(1, primi);
+		menu.put(2, secondi);
+		menu.put(3, dolci);
+		return menu;
+	}
+	
+	public void addtoMenu(List<Portata> portata) {
+		int size = menu.size();
+		menu.put(size, portata);
+	}
+	
+	/*
+	 * METODO AGGIUNGERE PORTATA AD UN MENU A SCELTA
+	 */
+	
+	public void addPortataToMenu(Portata portata, Integer idMenu) {
+		menu.get(idMenu).add(portata);
+	}
+	
+	public void addPortataToMenu(String nomePortata, double prezzoPortata, Integer idMenu) {
+		Portata portata = new Portata(nomePortata,prezzoPortata);
+		menu.get(idMenu).add(portata);
+	}
+	
 	/*
 	 * METODO PER STAMPARE NOME DEL MENU
 	 */
 
-//	static public String stampaTipoMenu(int indexMenu) {
-//		switch (indexMenu) {
-//		case 0:
-//			return "Antipasti";
-//		case 1:
-//			return "Primi";
-//		case 2:
-//			return "secondi";
-//		case 3:
-//			return "dolci";
-//		default:
-//			return "menù";
-//		}
-//	}
-
 	static public enum nomeMenu {
-		ANTIPASTI,
-		PRIMI,
-		SECONDI,
-		DOLCI;
+		ANTIPASTI, PRIMI, SECONDI, DOLCI;
 
 		public static String stampaTipoMenu(int indexMenu) {
 			String res = "";
@@ -166,7 +182,7 @@ public class Ristorante {
 				res = nomeMenu.DOLCI.toString();
 				break;
 			default:
-				res = "portata";
+				res = "FUORI MENU";
 			}
 			return res;
 		}
@@ -177,10 +193,10 @@ public class Ristorante {
 	 * METODO INTERNO PER TROVARE SINGOLA PORTATA
 	 */
 
-	static private Portata trovaPortata(int codicePortata, Portata[] tipoMenu) {
+	private Portata trovaPortata(Integer codicePortata, Integer idMenu) {
 		Portata portata = null;
-		if (codicePortata < tipoMenu.length) {
-			portata = tipoMenu[codicePortata];
+		if (codicePortata < menu.get(idMenu).size()) {
+			portata = menu.get(idMenu).get(codicePortata);
 		}
 		return portata;
 	}
@@ -203,47 +219,14 @@ public class Ristorante {
 		double res = 0.00;
 
 		for (int i = 0; i < codiciPortate.length; i++) {
-			switch (i) {
-			case 0:
-				for (int p : codiciPortate[i]) {
-					Portata portata = trovaPortata(p, antipasti);
-					if (portata != null) {
-						res += portata.getPrezzo();
-					} else if (portata == null && controllo) {
-						erroreCodicePortata(p, i);
-					}
+
+			for (int p : codiciPortate[i]) {
+				Portata portata = trovaPortata(p, i);
+				if (portata != null) {
+					res += portata.getPrezzo();
+				} else if (portata == null && controllo) {
+					erroreCodicePortata(p, i);
 				}
-				break;
-			case 1:
-				for (int p : codiciPortate[i]) {
-					Portata portata = trovaPortata(p, primi);
-					if (portata != null) {
-						res += portata.getPrezzo();
-					} else if (portata == null && controllo) {
-						erroreCodicePortata(p, i);
-					}
-				}
-				break;
-			case 2:
-				for (int p : codiciPortate[i]) {
-					Portata portata = trovaPortata(p, secondi);
-					if (portata != null) {
-						res += portata.getPrezzo();
-					} else if (portata == null && controllo) {
-						erroreCodicePortata(p, i);
-					}
-				}
-				break;
-			case 3:
-				for (int p : codiciPortate[i]) {
-					Portata portata = trovaPortata(p, dolci);
-					if (portata != null) {
-						res += portata.getPrezzo();
-					} else if (portata == null && controllo) {
-						erroreCodicePortata(p, i);
-					}
-				}
-				break;
 			}
 		}
 
@@ -266,52 +249,15 @@ public class Ristorante {
 
 			List<Portata> portataDinamica = new ArrayList<>();
 
-			switch (i) {
-			case 0:
-				for (int p : codiciPortate[i]) {
-					Portata portata = trovaPortata(p, antipasti);
-					if (portata == null && controllo) {
-						erroreCodicePortata(p, i);
-					}
-					portataDinamica.add(portata);
+			for (int p : codiciPortate[i]) {
+				Portata portata = trovaPortata(p, i);
+				if (portata == null && controllo) {
+					erroreCodicePortata(p, i);
 				}
-				;
-				listaPortateDinamica.add(portataDinamica);
-				break;
-			case 1:
-				for (int p : codiciPortate[i]) {
-					Portata portata = trovaPortata(p, primi);
-					if (portata == null && controllo) {
-						erroreCodicePortata(p, i);
-					}
-					portataDinamica.add(portata);
-				}
-				;
-				listaPortateDinamica.add(portataDinamica);
-				break;
-			case 2:
-				for (int p : codiciPortate[i]) {
-					Portata portata = trovaPortata(p, secondi);
-					if (portata == null && controllo) {
-						erroreCodicePortata(p, i);
-					}
-					portataDinamica.add(portata);
-				}
-				;
-				listaPortateDinamica.add(portataDinamica);
-				break;
-			case 3:
-				for (int p : codiciPortate[i]) {
-					Portata portata = trovaPortata(p, dolci);
-					if (portata == null && controllo) {
-						erroreCodicePortata(p, i);
-					}
-					portataDinamica.add(portata);
-				}
-				;
-				listaPortateDinamica.add(portataDinamica);
-				break;
+				portataDinamica.add(portata);
 			}
+			;
+			listaPortateDinamica.add(portataDinamica);
 		}
 
 		return listaPortateDinamica;
@@ -319,10 +265,9 @@ public class Ristorante {
 
 	/*
 	 * 
-	 * CLASSE INNESTATA SERVIZIO RISTORANTE
+	 * *************************CLASSE INNESTATA SERVIZIO RISTORANTE
 	 * 
 	 */
-
 
 	public class ServizioRistorante {
 
@@ -378,27 +323,9 @@ public class Ristorante {
 			double resScontato = calcolaSpesaConSconto(codiciPortate, 10, false);
 
 			for (List<Portata> p : portate) {
-
 				if (p.size() > 0)
-					switch (portate.indexOf(p)) {
-					case 0:
-						System.out.println("ANTIPASTI");
-						stampaNomePrezzo(p);
-						break;
-					case 1:
-						System.out.println("PRIMI");
-						stampaNomePrezzo(p);
-						break;
-					case 2:
-						System.out.println("SECONDI");
-						stampaNomePrezzo(p);
-						break;
-					case 3:
-						System.out.println("DOLCI");
-						stampaNomePrezzo(p);
-						break;
-
-					}
+					System.out.println(nomeMenu.stampaTipoMenu(portate.indexOf(p)));
+				stampaNomePrezzo(p);
 			}
 
 			System.out.println(String.format("TOTALE \n%s €", res));
@@ -410,53 +337,20 @@ public class Ristorante {
 		 * METODO PER STAMPARE UN MENU A SCELTA O INTERO MENU (NO PARAMETRI)
 		 */
 
-		private static void menuLoop(Portata[]... tipoMenu) {
-			int j = 0;
-			for (Portata[] portata : tipoMenu) {
-				int i = 0;
-				System.out.println(nomeMenu.stampaTipoMenu(j));
-
-				j++;
-				for (Portata p : portata) {
-					System.out.println("ID: " + i + "\n- " + p.getNome());
-					i++;
-				}
-				System.out.println("");
-			}
-		}
-
-		private static void menuLoop(int id, Portata[] tipoMenu) {
-			int i = 0;
+		public void stampaMenu(int id) {
+			Iterator<Portata> iterator = menu.get(id).iterator();
 			System.out.println(nomeMenu.stampaTipoMenu(id));
-			for (Portata portata : tipoMenu) {
-				System.out.println("ID: " + i + "\n- " + portata.getNome());
+			int i = 0;
+			while (iterator.hasNext()) {
+				System.out.println("ID: " + i + "\n- " + iterator.next().getNome());
 				i++;
 			}
 			System.out.println("");
 		}
-
-		public void stampaMenu(int id) {
-			switch (id) {
-			case 0:
-				menuLoop(id, antipasti);
-				break;
-			case 1:
-				menuLoop(id, primi);
-				break;
-			case 2:
-				menuLoop(id, secondi);
-				break;
-			case 3:
-				menuLoop(id, dolci);
-				break;
-			default:
-				stampaMenu();
-				break;
-			}
-		};
-
 		public void stampaMenu() {
-			menuLoop(antipasti, primi, secondi, dolci);
+			for (int i = 0; i < menu.size(); i++) {
+				stampaMenu(i);
+			}
 		}
 
 	}
