@@ -141,6 +141,10 @@ public class Ristorante {
 		return menu;
 	}
 	
+	/*
+	 * METODO PER AGGIUNGERE UNA LISTA DI PORTATE AL MENU
+	 */
+	
 	public void addtoMenu(List<Portata> portata) {
 		int size = menu.size();
 		menu.put(size, portata);
@@ -219,7 +223,6 @@ public class Ristorante {
 		double res = 0.00;
 
 		for (int i = 0; i < codiciPortate.length; i++) {
-
 			for (int p : codiciPortate[i]) {
 				Portata portata = trovaPortata(p, i);
 				if (portata != null) {
@@ -265,7 +268,7 @@ public class Ristorante {
 
 	/*
 	 * 
-	 * *************************CLASSE INNESTATA SERVIZIO RISTORANTE
+	 * ***************************************************CLASSE INNESTATA SERVIZIO RISTORANTE**************************************************************
 	 * 
 	 */
 
