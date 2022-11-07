@@ -25,14 +25,14 @@ public class CreaComanda {
 			int ordine = 0;
 			boolean loop = true;
 			if(indicePortate == 0) {				
-				System.out.println(String.format("Vuoi degli %s", Ristorante.stampaTipoMenu(indicePortate)));
+				System.out.println(String.format("Vuoi degli %s", Ristorante.nomeMenu.stampaTipoMenu(indicePortate)));
 			} else {
-				System.out.println(String.format("Vuoi dei %s", Ristorante.stampaTipoMenu(indicePortate)));
+				System.out.println(String.format("Vuoi dei %s", Ristorante.nomeMenu.stampaTipoMenu(indicePortate)));
 			}
 			res = scanner.nextLine();
 			if (res.contains("si")) {
 				while (loop) {
-					System.out.println(String.format("Scegli altri %s", Ristorante.stampaTipoMenu(indicePortate)));
+					System.out.println(String.format("Scegli altri %s", Ristorante.nomeMenu.stampaTipoMenu(indicePortate)));
 					servizioRistorante.stampaMenu(indicePortate);
 					ordine = scanner.nextInt();
 					scanner.nextLine();
@@ -45,7 +45,7 @@ public class CreaComanda {
 						}
 					} else {
 						System.out.println(String.format("Non abbiamo questi %s, scegli meglio",
-								Ristorante.stampaTipoMenu(indicePortate)));
+								Ristorante.nomeMenu.stampaTipoMenu(indicePortate)));
 					}
 				}
 			}

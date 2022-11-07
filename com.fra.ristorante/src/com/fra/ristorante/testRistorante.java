@@ -31,41 +31,43 @@ public class testRistorante {
 		Portata[][] menu = { ristorante.getAntipasti(), ristorante.getPrimi(), ristorante.getSecondi(),
 				ristorante.getDolci() };
 
-		System.out.println("**********************************TOTALE SPESA***************************");
-		System.out.println(ristorante.getTotaleSpesa2D(portate2D, true) + " €\n");
+//		System.out.println("**********************************TOTALE SPESA***************************");
+//		System.out.println(ristorante.getTotaleSpesa2D(portate2D, true) + " €\n");
+//
+//		System.out.println("**********************************TOTALE PORTATE*************************");
+//		List<List<Portata>> listaPortate = ristorante.getPortate2D(portate2D, true);
+//		int i = 0;
+//		for (List<Portata> portate : listaPortate) {
+//			System.out.println(String.format("%s", Ristorante.nomeMenu.stampaTipoMenu(i).toUpperCase()));
+//			for (Portata p : portate) {
+//				if (p != null)
+//					System.out.println(String.format("- %s", p.getNome()));
+//			}
+//			System.out.println("");
+//			i++;
+//		}
+//		
+//		Ristorante.ServizioRistorante servizioRistorante = ristorante.new ServizioRistorante();
 
-		System.out.println("**********************************TOTALE PORTATE*************************");
-		List<List<Portata>> listaPortate = ristorante.getPortate2D(portate2D, true);
-		int i = 0;
-		for (List<Portata> portate : listaPortate) {
-			System.out.println(String.format("%s", Ristorante.stampaTipoMenu(i).toUpperCase()));
-			for (Portata p : portate) {
-				if (p != null)
-					System.out.println(String.format("- %s", p.getNome()));
-			}
-			System.out.println("");
-			i++;
-		}
+//		System.out.println("**********************************SPESA CON SCONTO***********************");
+//		System.out.println(servizioRistorante.calcolaSpesaConSconto(portate2D, 10, true) + " €\n");
+//		System.out.println("**********************************INDIRIZZO COMPLETO*********************");
+//		servizioRistorante.getIndirizzoCompleto();
+//		System.out.println("");
+//		System.out.println("**********************************STAMPA COMANDA*************************");
+//		servizioRistorante.stampaComanda2D(portate2D);
+//		System.out.println("");
+//		System.out.println("**********************************STAMPA MENU A SCELTA*******************");
+//		servizioRistorante.stampaMenu(1);
+//		System.out.println("");
+//		System.out.println("**********************************STAMPA INTERO MENU*********************");
+//		servizioRistorante.stampaMenu();
+//		System.out.println("**********************************CREAZIONE COMANDA CON SCANNER*********************");
+//		CreaComanda.creaComanda(menu, ristorante);
 		
-		Ristorante.ServizioRistorante servizioRistorante = ristorante.new ServizioRistorante();
-
-		System.out.println("**********************************SPESA CON SCONTO***********************");
-		System.out.println(servizioRistorante.calcolaSpesaConSconto(portate2D, 10, true) + " €\n");
-		System.out.println("**********************************INDIRIZZO COMPLETO*********************");
-		servizioRistorante.getIndirizzoCompleto();
-		System.out.println("");
-		System.out.println("**********************************STAMPA COMANDA*************************");
-		servizioRistorante.stampaComanda2D(portate2D);
-		System.out.println("");
-		System.out.println("**********************************STAMPA MENU A SCELTA*******************");
-		servizioRistorante.stampaMenu(1);
-		System.out.println("");
-		System.out.println("**********************************STAMPA INTERO MENU*********************");
-		servizioRistorante.stampaMenu();
-		System.out.println("**********************************CREAZIONE COMANDA CON SCANNER*********************");
-
-		CreaComanda.creaComanda(menu, ristorante);
-
+		
+		System.out.println(ristorante.getMenu());
+		
 	}
 
 }

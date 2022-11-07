@@ -1,6 +1,7 @@
 package com.fra.ristorante;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Ristorante {
@@ -15,7 +16,9 @@ public class Ristorante {
 	private Portata[] primi;
 	private Portata[] secondi;
 	private Portata[] dolci;
-
+	private HashMap<Integer,Portata[]> menu = new HashMap<>();
+	
+	
 	public String getNome() {
 		return nome;
 	}
@@ -87,8 +90,25 @@ public class Ristorante {
 	public void setDolci(Portata[] dolci) {
 		this.dolci = dolci;
 	}
+	
+	public HashMap<Integer, Portata[]> getMenu() {
+		return menu;
+	}
 
 	public Ristorante() {
+	}
+	
+	private HashMap<Integer, Portata[]> addToMenu() {
+		menu.put(0,antipasti);
+		menu.put(1,primi);
+		menu.put(2, secondi);
+		menu.put(3, dolci);
+		return menu;
+	}
+	
+	public void addtoMenu(Portata[] portata) {
+		int size = menu.size();
+		menu.put(size + 1 , portata);
 	}
 
 	public Ristorante(String nome, String indirizzo, String città, String CAP, int civico, Portata[] antipasti,
@@ -102,25 +122,55 @@ public class Ristorante {
 		this.primi = primi;
 		this.secondi = secondi;
 		this.dolci = dolci;
+		this.menu = addToMenu(); 
 	}
 
 	/*
 	 * METODO PER STAMPARE NOME DEL MENU
 	 */
 
-	static public String stampaTipoMenu(int indexMenu) {
-		switch (indexMenu) {
-		case 0:
-			return "Antipasti";
-		case 1:
-			return "Primi";
-		case 2:
-			return "secondi";
-		case 3:
-			return "dolci";
-		default:
-			return "menù";
+//	static public String stampaTipoMenu(int indexMenu) {
+//		switch (indexMenu) {
+//		case 0:
+//			return "Antipasti";
+//		case 1:
+//			return "Primi";
+//		case 2:
+//			return "secondi";
+//		case 3:
+//			return "dolci";
+//		default:
+//			return "menù";
+//		}
+//	}
+
+	static public enum nomeMenu {
+		ANTIPASTI,
+		PRIMI,
+		SECONDI,
+		DOLCI;
+
+		public static String stampaTipoMenu(int indexMenu) {
+			String res = "";
+			switch (indexMenu) {
+			case 0:
+				res = nomeMenu.ANTIPASTI.toString();
+				break;
+			case 1:
+				res = nomeMenu.PRIMI.toString();
+				break;
+			case 2:
+				res = nomeMenu.SECONDI.toString();
+				break;
+			case 3:
+				res = nomeMenu.DOLCI.toString();
+				break;
+			default:
+				res = "portata";
+			}
+			return res;
 		}
+
 	}
 
 	/*
@@ -141,7 +191,7 @@ public class Ristorante {
 
 	static private void erroreCodicePortata(int codicePortata, int menuIndex) {
 		System.out.println(
-				String.format("prodotto con codice %s non trovato in %s", codicePortata, stampaTipoMenu(menuIndex)));
+				"prodotto con codice " + codicePortata + " non trovato in " + nomeMenu.stampaTipoMenu(menuIndex));
 	}
 
 	/*
@@ -273,6 +323,7 @@ public class Ristorante {
 	 * 
 	 */
 
+
 	public class ServizioRistorante {
 
 		/*
@@ -358,50 +409,55 @@ public class Ristorante {
 		/*
 		 * METODO PER STAMPARE UN MENU A SCELTA O INTERO MENU (NO PARAMETRI)
 		 */
-		
+
 		private static void menuLoop(Portata[]... tipoMenu) {
 			int j = 0;
-			for(Portata[] portata : tipoMenu) {
+			for (Portata[] portata : tipoMenu) {
 				int i = 0;
-				System.out.println(String.format("%s", Ristorante.stampaTipoMenu(j).toUpperCase()));
+				System.out.println(nomeMenu.stampaTipoMenu(j));
+
 				j++;
-				for(Portata p : portata) {
+				for (Portata p : portata) {
 					System.out.println("ID: " + i + "\n- " + p.getNome());
 					i++;
 				}
 				System.out.println("");
 			}
 		}
-		
-		private static void menuLoop(int id,Portata[] tipoMenu) {
+
+		private static void menuLoop(int id, Portata[] tipoMenu) {
 			int i = 0;
-			System.out.println(String.format("%s", Ristorante.stampaTipoMenu(id).toUpperCase()));
-			for(Portata portata : tipoMenu) {
-					System.out.println("ID: " + i + "\n- " + portata.getNome());
-					i++;
+			System.out.println(nomeMenu.stampaTipoMenu(id));
+			for (Portata portata : tipoMenu) {
+				System.out.println("ID: " + i + "\n- " + portata.getNome());
+				i++;
 			}
 			System.out.println("");
 		}
 
 		public void stampaMenu(int id) {
-			switch(id) {
-			case 0 : menuLoop(id,antipasti);
-			break;
-			case 1 : menuLoop(id,primi);
-			break;
-			case 2 : menuLoop(id,secondi);
-			break;
-			case 3 : menuLoop(id,dolci);
-			break;
-			default : stampaMenu() ;
-			break;
-			}	
-	};
-	
+			switch (id) {
+			case 0:
+				menuLoop(id, antipasti);
+				break;
+			case 1:
+				menuLoop(id, primi);
+				break;
+			case 2:
+				menuLoop(id, secondi);
+				break;
+			case 3:
+				menuLoop(id, dolci);
+				break;
+			default:
+				stampaMenu();
+				break;
+			}
+		};
+
 		public void stampaMenu() {
-			menuLoop(antipasti,primi,secondi,dolci) ;
+			menuLoop(antipasti, primi, secondi, dolci);
 		}
-		
 
 	}
 
