@@ -1,6 +1,7 @@
 package com.fra.ristorante;
 
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -266,8 +267,8 @@ public class Ristorante {
 		return listaPortateDinamica;
 	}
 
-	/*
-	 * 
+	/**
+	 * !
 	 * ***************************************************CLASSE INNESTATA SERVIZIO RISTORANTE**************************************************************
 	 * 
 	 */
@@ -324,14 +325,14 @@ public class Ristorante {
 			List<List<Portata>> portate = getPortate2D(codiciPortate, true);
 			double res = getTotaleSpesa2D(codiciPortate, false);
 			double resScontato = calcolaSpesaConSconto(codiciPortate, 10, false);
-
+			Currency cur = Currency.getInstance("EUR");
 			for (List<Portata> p : portate) {
 				if (p.size() > 0)
-					System.out.println(nomeMenu.stampaTipoMenu(portate.indexOf(p)));
+				System.out.println(nomeMenu.stampaTipoMenu(portate.indexOf(p)));
 				stampaNomePrezzo(p);
 			}
 
-			System.out.println(String.format("TOTALE \n%s €", res));
+			System.out.println(String.format("TOTALE \n%s %s", res,cur.getSymbol()));
 			System.out.println(String.format("TOTALE CON SCONTO \n%s €", resScontato));
 
 		}
