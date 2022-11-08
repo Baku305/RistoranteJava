@@ -46,7 +46,7 @@ public class CreaComanda {
 		}
 	}
 
-	static public int[][] creaComanda(Ristorante ristorante) {
+	static public int[][] creaComanda(Ristorante ristorante) throws Exception {
 		
 		List<Integer> antipasti = new ArrayList<Integer>();
 		List<Integer> primi = new ArrayList<Integer>();

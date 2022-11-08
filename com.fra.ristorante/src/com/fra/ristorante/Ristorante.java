@@ -210,8 +210,8 @@ public class Ristorante {
 	 * METODO INTERNO PER STAMPARE ERRORE IN CASO DI CONTROLLO
 	 */
 
-	static private void erroreCodicePortata(int codicePortata, int menuIndex) {
-		System.out.println(
+	static private String erroreCodicePortata (int codicePortata, int menuIndex) throws NullPointerException {
+		return (
 				"prodotto con codice " + codicePortata + " non trovato in " + nomeMenu.stampaTipoMenu(menuIndex));
 	}
 
@@ -219,7 +219,7 @@ public class Ristorante {
 	 * METODO PER IL TOTALE DELLA SPESA CON OPZIONE PER IL CONTROLLO
 	 */
 
-	public double getTotaleSpesa2D(int[][] codiciPortate, boolean controllo) {
+	public double getTotaleSpesa2D(int[][] codiciPortate, boolean controllo) throws Exception {
 
 		double res = 0.00;
 
@@ -229,7 +229,7 @@ public class Ristorante {
 				if (portata != null) {
 					res += portata.getPrezzo();
 				} else if (portata == null && controllo) {
-					erroreCodicePortata(p, i);
+					System.out.println(new NullPointerException(erroreCodicePortata(p, i)));
 				}
 			}
 		}
@@ -245,7 +245,7 @@ public class Ristorante {
 	 * 
 	 */
 
-	public List<List<Portata>> getPortate2D(int[][] codiciPortate, boolean controllo) {
+	public List<List<Portata>> getPortate2D(int[][] codiciPortate, boolean controllo) throws Exception {
 
 		List<List<Portata>> listaPortateDinamica = new ArrayList<>();
 
@@ -256,7 +256,7 @@ public class Ristorante {
 			for (int p : codiciPortate[i]) {
 				Portata portata = trovaPortata(p, i);
 				if (portata == null && controllo) {
-					erroreCodicePortata(p, i);
+					System.out.println(new NullPointerException(erroreCodicePortata(p, i)));
 				}
 				portataDinamica.add(portata);
 			}
@@ -280,7 +280,7 @@ public class Ristorante {
 		 * CONTROLLO CHE POI VIENE PASSATO AL METOTO "GetTotaleSpesa"
 		 */
 
-		public double calcolaSpesaConSconto(int[][] codiciPortate, int sconto, boolean controllo) {
+		public double calcolaSpesaConSconto(int[][] codiciPortate, int sconto, boolean controllo) throws Exception {
 
 			double totaleSpesa = getTotaleSpesa2D(codiciPortate, controllo);
 
@@ -320,7 +320,7 @@ public class Ristorante {
 		 * METODO PER STAMPARE LA COMANDA PER INTERNO
 		 */
 
-		public void stampaComanda2D(int[][] codiciPortate) {
+		public void stampaComanda2D(int[][] codiciPortate) throws Exception {
 
 			List<List<Portata>> portate = getPortate2D(codiciPortate, true);
 			double res = getTotaleSpesa2D(codiciPortate, false);

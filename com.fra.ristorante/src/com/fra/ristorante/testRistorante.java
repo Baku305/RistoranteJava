@@ -8,7 +8,7 @@ import java.util.List;
 
 public class testRistorante {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 
 		int[][] portate2D = { { 0, 0, 1, 2, 5 }, { 0, 1, 2, 5 }, { 0, 2 }, { 0, 1 } };
 		int[][] portate2D2 = { { 0, 0, 1, 2, 5 }, { 0, 1, 2, 5 }, { 0, 2 }, { 0, 1 }, {0,0} };
