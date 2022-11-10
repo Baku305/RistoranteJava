@@ -169,27 +169,31 @@ public class Ristorante {
 	 */
 
 	static public enum nomeMenu {
-		ANTIPASTI, PRIMI, SECONDI, DOLCI;
-
+		ANTIPASTI("antipasti"), PRIMI("primi"), SECONDI("secondi"), DOLCI("dolci");
+		private final String valore;
 		public static String stampaTipoMenu(int indexMenu) {
 			String res = "";
 			switch (indexMenu) {
 			case 0:
-				res = nomeMenu.ANTIPASTI.toString();
+				res = nomeMenu.ANTIPASTI.valore;
 				break;
 			case 1:
-				res = nomeMenu.PRIMI.toString();
+				res = nomeMenu.PRIMI.valore;
 				break;
 			case 2:
-				res = nomeMenu.SECONDI.toString();
+				res = nomeMenu.SECONDI.valore;
 				break;
 			case 3:
-				res = nomeMenu.DOLCI.toString();
+				res = nomeMenu.DOLCI.valore;
 				break;
 			default:
 				res = "FUORI MENU";
 			}
 			return res;
+		}
+
+		nomeMenu(String valore){
+			this.valore = valore;
 		}
 
 	}
